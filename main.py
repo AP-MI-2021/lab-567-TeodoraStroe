@@ -7,8 +7,8 @@ def main():
     lista = []
     lista = adaugaRezervare("1", "rezervare1", "economy", 100, "da", lista)
     lista = adaugaRezervare("2", "rezervare2", "business", 120, "nu", lista)
+    lista = adaugaRezervare("3", "rezervare1", "economy plus", 120, "nu", lista)
     runMenu(lista)
 
-main()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == '__main__':
+    main()
