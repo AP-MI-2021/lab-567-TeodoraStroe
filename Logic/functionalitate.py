@@ -26,7 +26,7 @@ def clasaSuperioara(numeOriginal, lista):
                 rezervareNoua = creeazaRezervare(
                     getId(rezervare),
                     getNume(rezervare),
-                    getNume(rezervare),
+                    getClasa(rezervare),
                     getPret(rezervare),
                     getCheckin(rezervare)
                 )
