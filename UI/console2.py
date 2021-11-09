@@ -13,25 +13,48 @@ def print_help():
     print("Comenzile trebuie separate prin ; ")
 
 def adauga(lista, parametrii):
-    id = str(parametrii[1])
-    nume = str(parametrii[2])
-    clasa = str(parametrii[3])
-    pret = float(parametrii[4])
-    checkin = str(parametrii[5])
-    lista = adaugaRezervare(id, nume, clasa, pret, checkin, lista)
-    print("Adaugare efectuata")
-    return lista
+    try:
+        if len(parametrii) < 6:
+            print("Parametrii insuficienti")
+            return lista
+        if len(parametrii) > 6:
+            print("Prea multi parametrii")
+            return lista
+        id = str(parametrii[1])
+        nume = str(parametrii[2])
+        clasa = str(parametrii[3])
+        pret = float(parametrii[4])
+        checkin = str(parametrii[5])
+        lista = adaugaRezervare(id, nume, clasa, pret, checkin, lista)
+        print("Adaugare efectuata")
+        return lista
+    except ValueError as ve :
+        print("Eroare: {}".format(ve))
+        return lista
 
 def sterge(lista, parametrii):
-    id = parametrii[1]
-    if getById(id, lista) is None:
-        raise ValueError("Nu exista rezervare cu Id-ul dat")
-    print("Stergere efectuata")
-    return stergeRezervare(id, lista)
+    try:
+        if len(parametrii) < 2:
+            print("Parametrii insuficienti")
+            return lista
+        if len(parametrii) > 2:
+            print("Prea multi parametrii")
+            return lista
+        id = parametrii[1]
+        if getById(id, lista) is None:
+            raise ValueError("Nu exista rezervare cu Id-ul dat")
+        print("Stergere efectuata")
+        return stergeRezervare(id, lista)
+    except ValueError as ve:
+        print("Eroare: {}".format(ve))
+        return lista
 
-def showall(lista):
-    for rezervare in lista:
-        print(toString(rezervare))
+def showall(lista, parametrii):
+    if len(parametrii)>1:
+        print("Comanda Afisare nu contine alti parametrii")
+    else:
+        for rezervare in lista:
+            print(toString(rezervare))
 
 def run_console(lista):
     contor = True
@@ -56,6 +79,8 @@ def run_console(lista):
                 lista = sterge(lista, parametrii)
             elif parametrii[0] == "Afisare":
                 print("Lista de rezervari este: ")
-                showall(lista)
+                showall(lista, parametrii)
             elif parametrii[0] == "Stop":
                 contor = False
+            else:
+                print("Comanda incorecta! Reincercati!")

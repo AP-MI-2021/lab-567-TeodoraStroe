@@ -12,6 +12,18 @@ def adaugaRezervare(id, nume, clasa, pret, checkin, lista):
     :param lista: lista de rezervari
     :return: o lista continand atat elementele vechi, cat si noua rezervare
     '''
+    if getById(id, lista) is not None:
+        raise ValueError("Id-ul exista deja")
+    if int(id) < 1:
+        raise ValueError("Id-ul nu poate fi nul sau negativ")
+    if len(nume) == 0:
+        raise ValueError("Introduceti numele!")
+    if clasa != "economy" and clasa != "business" and clasa != "economy plus":
+        raise ValueError("Clasa invalida! Introduceti economy, economy plus sau business")
+    if pret < 0:
+        raise ValueError("Pretul nu poate fi negativ")
+    if checkin != "da" and checkin != "nu":
+        raise ValueError("Checkin invalid! Introduceti da sau nu")
     rezervare = creeazaRezervare(id, nume, clasa, pret, checkin)
     return lista + [rezervare]
 
@@ -34,6 +46,8 @@ def stergeRezervare(id, lista):
     :param lista: lista de rezervari
     :return: o lista de rezervari fara elementul cu id-ul dat
     """
+    if getById(id, lista) is None:
+        raise ValueError("Nu exista o rezervare cu id-ul dat")
     return [rezervare for rezervare in lista if getId(rezervare) != id]
 
 def modificaRezervare(id, nume, clasa, pret, checkin, lista):
@@ -47,6 +61,18 @@ def modificaRezervare(id, nume, clasa, pret, checkin, lista):
     :param lista: O lista de rezervari.
     :return: lista modificata.
     """
+    if getById(id, lista) is None:
+        raise ValueError("Id-ul exista deja")
+    if int(id) < 1:
+        raise ValueError("Id-ul nu poate fi nul sau negativ")
+    if len(nume) == 0:
+        raise ValueError("Introduceti numele!")
+    if clasa != "economy" and clasa != "business" and clasa != "economy plus":
+        raise ValueError("Clasa invalida! Introduceti economy, economy plus sau business")
+    if pret < 0:
+        raise ValueError("Pretul nu poate fi negativ")
+    if checkin != "da" and checkin != "nu":
+        raise ValueError("Checkin invalid! Introduceti da sau nu")
     listaNoua = []
     for rezervare in lista:
         if getId(rezervare) == id:

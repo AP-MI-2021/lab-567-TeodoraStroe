@@ -8,13 +8,7 @@ def creeazaRezervare(id, nume, clasa, pret, checkin):
     :param checkin: string
     :return: o lista ce contine o rezervare
     '''
-    list=[]
-    list.append(id)
-    list.append(nume)
-    list.append(clasa)
-    list.append(pret)
-    list.append(checkin)
-    return list
+    return [str(id), str(nume), str(clasa), pret, str(checkin)]
 
 def getId(rezervare):
     '''

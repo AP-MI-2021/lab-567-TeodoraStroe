@@ -50,3 +50,30 @@ def ieftinire(procentaj, lista):
         else:
             listaNoua.append(rezervare)
     return listaNoua
+
+def pretMaxim(lista):
+    rezultat = {}
+    for rezervare in lista:
+        clasa = getClasa(rezervare)
+        pret = getPret(rezervare)
+        if clasa in rezultat:
+            if pret > rezultat[clasa]:
+                rezultat[clasa] = pret
+        else:
+                rezultat[clasa] = pret
+    return rezultat
+
+def ordonareDupaPret(lista):
+    return sorted(lista, key = lambda rezervare: getPret(rezervare)*-1)
+
+def sumaPretPeNume(lista):
+    rezultat = {}
+    for rezervare in lista:
+        nume = getNume(rezervare)
+        pret = getPret(rezervare)
+        if nume in rezultat:
+            rezultat[nume] = rezultat[nume] + pret
+        else:
+            rezultat[nume] = pret
+    return rezultat
+

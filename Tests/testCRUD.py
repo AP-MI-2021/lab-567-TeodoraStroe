@@ -24,10 +24,14 @@ def testStergeRezervare():
     assert getById("1", lista) is None
     assert getById("2", lista) is not None
 
-    lista = stergeRezervare("3", lista)
-
-    assert len(lista) == 1
-    assert getById("2", lista) is not None
+    try:
+        lista = stergeRezervare("3", lista)
+        assert False
+    except ValueError:
+        assert len(lista) == 1
+        assert getById("2", lista) is not None
+    except Exception:
+        assert False
 
 def testModificaRezervare():
     lista = []
@@ -52,12 +56,14 @@ def testModificaRezervare():
 
     lista = []
     lista = adaugaRezervare("1", "rezervare1", "economy", 100, "da", lista)
-
-    lista = modificaRezervare("3", "rezervare3", "economy plus", 500, "da", lista)
-
-    rezervareNeupdatata = getById("1", lista)
-    assert getId(rezervareNeupdatata) == "1"
-    assert getNume(rezervareNeupdatata) == "rezervare1"
-    assert getClasa(rezervareNeupdatata) == "economy"
-    assert getPret(rezervareNeupdatata) == 100
-    assert getCheckin(rezervareNeupdatata) == "da"
+    try:
+        lista = modificaRezervare("3", "rezervare3", "economy plus", 500, "da", lista)
+    except ValueError:
+        rezervareNeupdatata = getById("1", lista)
+        assert getId(rezervareNeupdatata) == "1"
+        assert getNume(rezervareNeupdatata) == "rezervare1"
+        assert getClasa(rezervareNeupdatata) == "economy"
+        assert getPret(rezervareNeupdatata) == 100
+        assert getCheckin(rezervareNeupdatata) == "da"
+    except Exception:
+        assert False
